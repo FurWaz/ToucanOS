@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 290 290" xml:space="preserve">
+<style type="text/css">
+	.st0{display:none;}
+	.st1{display:inline;fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;}
+	.st2{display:inline;fill:none;stroke:#000000;stroke-miterlimit:10;}
+	.st3{fill:#f59e0b;}
+	.st4{fill:#f97316;}
+	.st5{fill:#FFFFFF;}
+	.st6{fill:none;stroke:#000000;stroke-miterlimit:10;}
+</style>
+<g id="Calque_1" class="st0">
+	<circle class="st1" cx="331.8" cy="321.8" r="144.8"/>
+	<line class="st2" x1="331.8" y1="177" x2="331.8" y2="466.5"/>
+	<line class="st2" x1="187" y1="321.8" x2="331.8" y2="321.8"/>
+	<line class="st2" x1="187" y1="321.8" x2="238.2" y2="277.1"/>
+	<line class="st2" x1="238.2" y1="277.1" x2="331.8" y2="277.1"/>
+	<ellipse class="st2" cx="391.1" cy="264.3" rx="46.1" ry="47.2"/>
+	<line class="st2" x1="238.2" y1="277.1" x2="189.4" y2="295.1"/>
+	<circle class="st2" cx="370" cy="264.3" r="10.2"/>
+	<circle class="st2" cx="264.4" cy="277" r="80.9"/>
+	<circle class="st2" cx="308.5" cy="264.3" r="128.8"/>
+</g>
+<g id="Calque_2">
+	<path d="M144.7,0.3v289.5c79.9,0,144.8-64.8,144.8-144.8S224.7,0.3,144.7,0.3z"/>
+	<path class="st3" d="M144.7,0.3C64.8,0.3,0,65.1,0,145.1h144.8V0.3z"/>
+	<path class="st4" d="M144.7,100.5c0,14.9,0,29.7,0,44.6c-48.3,0-96.5,0-144.8,0c17.1-14.9,34.1-29.7,51.2-44.6
+		C82.3,100.5,113.5,100.5,144.7,100.5z"/>
+	<path class="st5" d="M204.3,40.4c-25.4,0-46,20.6-46,46c0,1.3,0.1,2.5,0.2,3.8c1.2,33.4-8.1,45-13.7,54.9v69.2
+		c56.1-9.1,105.6-60.5,105.5-127.9C250.3,61,229.7,40.4,204.3,40.4z"/>
+	<circle cx="185.2" cy="82.9" r="10.2"/>
+	<path class="st6" d="M7,100.5"/>
+	<path class="st6" d="M51.2,100.5"/>
+	<path class="st6" d="M9.9,107.9"/>
+	<path class="st6" d="M9.9,107.9"/>
+	<path d="M7,100.5c-4.5,14.1-7,29-7,44.6l51.2-44.6H7z"/>
+</g>
+</svg>

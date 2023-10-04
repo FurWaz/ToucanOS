@@ -17,22 +17,18 @@ class WindowManager {
         const window = new Window(this, ...params);
         let positionValid = false;
         let maxIterations = 100;
-        console.log("Finding good position for window");
         while (!positionValid && maxIterations-- > 0) {
             positionValid = true;
             this.windows.forEach(w => {
                 if (w.getX() === window.getX() && w.getY() === window.getY()) {
                     positionValid = false;
-                    console.log("Found overlapping window, moving it");
                 }
             });
             if (!positionValid) {
                 window.setX(window.getX() + 0.02 % 0.8);
                 window.setY(window.getY() + 0.02 % 0.8);
-                console.log("Position is now " + window.getX() + ", " + window.getY());
             };
         }
-        console.log("Position is now " + window.getX() + ", " + window.getY());
         this.windows.push(window);
         this.focusedWindow = window;
         return window;

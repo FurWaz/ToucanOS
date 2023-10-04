@@ -13,7 +13,7 @@
                 :win="win"
             />
         </div>
-        <div class="flex h-fit w-full backdrop-blur border-t-2 border-slate-200/[0.2] dark:border-slate-600/[0.4] p-1.5">
+        <div class="flex h-fit w-full backdrop-blur border-t-2 border-slate-200/[0.2] dark:border-slate-600/[0.4] p-1.5 z-50">
             <div class="flex grow space-x-2">
                 <button
                     v-for="app in apps"
@@ -114,6 +114,11 @@ export default {
     mounted() {
         this.manager.setPlayground(this.$refs['playground']);
         this.createHomeWindow();
+
+        window.addEventListener('contextmenu', ev => {
+            console.log(ev);
+            ev.preventDefault();
+        });
     },
     methods: {
         createWindow(title, comp) {

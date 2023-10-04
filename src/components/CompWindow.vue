@@ -39,7 +39,7 @@
         </div>
         <div class="flex grow p-2 pt-0 max-h-full min-h-0">
             <div class="flex grow max-h-full min-h-0 w-full max-w-full bg-slate-600/[0.3] dark:bg-slate-800/[0.4] border-2 border-slate-200/[0.2] dark:border-slate-600/[0.4] rounded-md overflow-hidden select-auto">
-                <div class="flex grow overflow-y-scroll">
+                <div class="flex grow overflow-y-auto">
                     <iframe
                         v-if="typeof(win.content) === 'string' && win.content.startsWith('http')"
                         class="w-full h-full"

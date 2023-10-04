@@ -26,6 +26,10 @@ class Window {
         this.maximized = !this.maximized;
     }
 
+    isMaximized() {
+        return this.maximized;
+    }
+
     isFocused() {
         return this.manager.getFocusedWindow() === this;
     }
@@ -63,11 +67,11 @@ class Window {
     }
 
     setWidth(width) {
-        this.width = width;
+        this.width = Math.min(Math.max(0, width), 1);
     }
 
     setHeight(height) {
-        this.height = height;
+        this.height = Math.min(Math.max(0, height), 1);
     }
 
     setX(x) {

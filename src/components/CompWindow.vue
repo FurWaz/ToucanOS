@@ -1,6 +1,6 @@
 <template>
     <div
-        class="flex fixed flex-col rounded-lg border-2 backdrop-blur border-slate-200/[0.2] dark:border-slate-600/[0.4] select-none"
+        class="flex fixed flex-col rounded-lg border-2 backdrop-blur border-slate-200/[0.2] dark:border-slate-600/[0.4] select-none min-w-[8em] min-h-[4em]"
         :class="win.isFocused() ? 'z-10 shadow-xl' : 'z-0 shadow-md'"
         :style="'top: ' + win.getY() * playground.height + 'px; left: ' + win.getX() * playground.width + 'px; width: ' + win.getWidth() * playground.width + 'px; height: ' + win.getHeight() * playground.height + 'px'"
     >
@@ -11,9 +11,9 @@
         <div class="flex justify-end">
             <div
                 ref="move-bar"
-                class="flex grow min-w-[4em] items-center"
+                class="flex grow items-center overflow-hidden"
             >
-                <p class="px-2 font-semibold text-slate-200">
+                <p class="px-2 font-semibold text-slate-200 whitespace-nowrap text-ellipsis overflow-hidden">
                     {{ win.getTitle() }}
                 </p>
             </div>
@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="flex grow p-2 pt-0 max-h-full min-h-0">
-            <div class="flex grow max-h-full min-h-0 w-full bg-slate-600/[0.3] dark:bg-slate-800/[0.4] border-2 border-slate-200/[0.2] dark:border-slate-600/[0.4] rounded-md overflow-hidden select-auto">
+            <div class="flex grow max-h-full min-h-0 w-full max-w-full bg-slate-600/[0.3] dark:bg-slate-800/[0.4] border-2 border-slate-200/[0.2] dark:border-slate-600/[0.4] rounded-md overflow-hidden select-auto">
                 <div class="flex grow overflow-y-scroll">
                     <iframe
                         v-if="typeof(win.content) === 'string' && win.content.startsWith('http')"
@@ -153,7 +153,7 @@ export default {
                 lastUpTime = Date.now();
             });
             window.addEventListener('mousemove', ev => {
-                if (mouseDown) {
+                if (mouseDown && !this.win.isMaximized()) {
                     const deltaX = ev.clientX - mouseStartPos.x;
                     const deltaY = ev.clientY - mouseStartPos.y;
                     this.win.setX(winStartPos.x + deltaX / window.innerWidth);

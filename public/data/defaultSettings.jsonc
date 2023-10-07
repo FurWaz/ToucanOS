@@ -1,0 +1,4 @@
+{
+    "theme": "auto", // "auto", "light", "dark"
+    "showSeconds": false // true, false
+}

@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import Settings from './scripts/data/settings';
 export default {
     name: "App",
     components: {
@@ -14,15 +15,24 @@ export default {
         return {}
     },
     mounted() {
-        let theme = localStorage.getItem('theme');
-        if (!theme) theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        if (theme === 'dark') {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
+        const updateTheme = theme => {
+            currentTheme = theme;
+            if (!theme || theme === 'auto') theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        };
+        let currentTheme = null;
+
+        Settings.getSetting("theme").then(updateTheme);
+        Settings.addSettingListener("theme", updateTheme);
 
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (currentTheme !== null && currentTheme !== 'auto')
+                return;
+            
             if (e.matches) {
                 document.documentElement.classList.add('dark');
             } else {

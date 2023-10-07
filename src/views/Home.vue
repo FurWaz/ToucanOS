@@ -1,8 +1,10 @@
 <template>
     <div
         ref="background"
-        class="flex grow flex-col min-h-0 h-full min-w-0 w-full bgi"
+        class="flex grow flex-col min-h-0 h-full min-w-0 w-full"
     >
+        <div class="fixed top-0 left-0 right-0 bottom-0 bg-dark" />
+        <div class="fixed top-0 left-0 right-0 bottom-0 bg-light opacity-1 dark:opacity-0" />
         <p class="fixed top-0 right-2 text-slate-50/[0.6] dark:text-slate-50/[0.3]">
             Made by
             <a
@@ -22,6 +24,10 @@
                 :win="win"
             />
         </div>
+        <comp-settings
+            ref="settings-panel"
+            class="hidden absolute right-2 bottom-14"
+        />
         <div class="flex h-fit w-full backdrop-blur border-t-2 border-slate-200/[0.2] dark:border-slate-600/[0.4] p-1.5 z-40">
             <div class="flex grow space-x-2">
                 <button
@@ -48,6 +54,14 @@
                 </button>
             </div>
             <div class="flex space-x-2">
+                <div class="flex flex-col justify-center items-end text-slate-200 -translate-y-1">
+                    <p class="text-md font-bold">
+                        {{ currentHour }}
+                    </p>
+                    <p class="text-xs font-bold -my-1">
+                        {{ currentDate }}
+                    </p>
+                </div>
                 <button
                     v-for="control in controls"
                     :key="control.name"
@@ -83,12 +97,15 @@ import ViewProjects from './windows/ViewProjects.vue';
 import ViewAbout from './windows/ViewAbout.vue';
 import {markRaw} from "vue";
 import CompContextmenu from '../components/CompContextmenu.vue';
+import CompSettings from '../components/CompSettings.vue';
+import Settings from '../scripts/data/settings';
 
 export default {
     name: "HomeView",
     components: {
         CompWindow,
-        CompContextmenu
+        CompContextmenu,
+        CompSettings
     },
     data() {
         return {
@@ -117,9 +134,12 @@ export default {
                     name: 'Paramètres',
                     viewBox: '0 0 512 512',
                     icon: 'M256 0c17 0 33.6 1.7 49.8 4.8c7.9 1.5 21.8 6.1 29.4 20.1c2 3.7 3.6 7.6 4.6 11.8l9.3 38.5C350.5 81 360.3 86.7 366 85l38-11.2c4-1.2 8.1-1.8 12.2-1.9c16.1-.5 27 9.4 32.3 15.4c22.1 25.1 39.1 54.6 49.9 86.3c2.6 7.6 5.6 21.8-2.7 35.4c-2.2 3.6-4.9 7-8 10L459 246.3c-4.2 4-4.2 15.5 0 19.5l28.7 27.3c3.1 3 5.8 6.4 8 10c8.2 13.6 5.2 27.8 2.7 35.4c-10.8 31.7-27.8 61.1-49.9 86.3c-5.3 6-16.3 15.9-32.3 15.4c-4.1-.1-8.2-.8-12.2-1.9L366 427c-5.7-1.7-15.5 4-16.9 9.8l-9.3 38.5c-1 4.2-2.6 8.2-4.6 11.8c-7.7 14-21.6 18.5-29.4 20.1C289.6 510.3 273 512 256 512s-33.6-1.7-49.8-4.8c-7.9-1.5-21.8-6.1-29.4-20.1c-2-3.7-3.6-7.6-4.6-11.8l-9.3-38.5c-1.4-5.8-11.2-11.5-16.9-9.8l-38 11.2c-4 1.2-8.1 1.8-12.2 1.9c-16.1 .5-27-9.4-32.3-15.4c-22-25.1-39.1-54.6-49.9-86.3c-2.6-7.6-5.6-21.8 2.7-35.4c2.2-3.6 4.9-7 8-10L53 265.7c4.2-4 4.2-15.5 0-19.5L24.2 218.9c-3.1-3-5.8-6.4-8-10C8 195.3 11 181.1 13.6 173.6c10.8-31.7 27.8-61.1 49.9-86.3c5.3-6 16.3-15.9 32.3-15.4c4.1 .1 8.2 .8 12.2 1.9L146 85c5.7 1.7 15.5-4 16.9-9.8l9.3-38.5c1-4.2 2.6-8.2 4.6-11.8c7.7-14 21.6-18.5 29.4-20.1C222.4 1.7 239 0 256 0zM218.1 51.4l-8.5 35.1c-7.8 32.3-45.3 53.9-77.2 44.6L97.9 120.9c-16.5 19.3-29.5 41.7-38 65.7l26.2 24.9c24 22.8 24 66.2 0 89L59.9 325.4c8.5 24 21.5 46.4 38 65.7l34.6-10.2c31.8-9.4 69.4 12.3 77.2 44.6l8.5 35.1c24.6 4.5 51.3 4.5 75.9 0l8.5-35.1c7.8-32.3 45.3-53.9 77.2-44.6l34.6 10.2c16.5-19.3 29.5-41.7 38-65.7l-26.2-24.9c-24-22.8-24-66.2 0-89l26.2-24.9c-8.5-24-21.5-46.4-38-65.7l-34.6 10.2c-31.8 9.4-69.4-12.3-77.2-44.6l-8.5-35.1c-24.6-4.5-51.3-4.5-75.9 0zM208 256a48 48 0 1 0 96 0 48 48 0 1 0 -96 0zm48 96a96 96 0 1 1 0-192 96 96 0 1 1 0 192z',
-                    callback: () => {}
+                    callback: () => { this.toggleSettings() }
                 }
-            ]
+            ],
+            currentHour: this.getCurrentHour(),
+            currentDate: this.getCurrentDate(),
+            showSeconds: false
         };
     },
     mounted() {
@@ -131,6 +151,20 @@ export default {
             // ContextMenu.setOptions(backgroundOptions);
             // ContextMenu.display();
             ev.preventDefault();
+        });
+
+        setInterval(() => {
+            this.currentHour = this.getCurrentHour();
+            this.currentDate = this.getCurrentDate();
+        }, 1000);
+
+        Settings.addSettingListener('showSeconds', (value) => {
+            this.showSeconds = value;
+            this.currentHour = this.getCurrentHour();
+        });
+        Settings.getSetting('showSeconds').then(value => {
+            this.showSeconds = value;
+            this.currentHour = this.getCurrentHour();
         });
     },
     methods: {
@@ -144,7 +178,20 @@ export default {
         },
         createHomeWindow() { this.createWindow('Bienvenue', CompToucanOs); },
         createProjectWindow() { this.createWindow('Projets', ViewProjects); },
-        createAboutWindow() { this.createWindow('À propos', ViewAbout); }
+        createAboutWindow() { this.createWindow('À propos', ViewAbout); },
+        getCurrentHour() { return new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', second: this.showSeconds ? '2-digit' : undefined }) },
+        getCurrentDate() { return new Date().toLocaleDateString('fr-FR') },
+        toggleSettings() {
+            const panel = this.$refs['settings-panel'];
+            panel.$el.classList.remove('hidden');
+            if (panel.$el.classList.contains('show-up')) {
+                panel.$el.classList.remove('show-up');
+                panel.$el.classList.add('hide-down');
+            } else {
+                panel.$el.classList.remove('hide-down');
+                panel.$el.classList.add('show-up');
+            }
+        }
     }
 }
 </script>

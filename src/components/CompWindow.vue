@@ -39,7 +39,10 @@
         </div>
         <div class="flex grow p-2 pt-0 max-h-full min-h-0">
             <div class="flex grow max-h-full min-h-0 w-full max-w-full bg-slate-600/[0.3] dark:bg-slate-800/[0.4] border-2 border-slate-200/[0.2] dark:border-slate-600/[0.4] rounded-md overflow-hidden select-auto">
-                <div class="flex grow overflow-y-auto">
+                <div
+                    ref="content"
+                    class="flex grow overflow-y-auto"
+                >
                     <iframe
                         v-if="typeof(win.content) === 'string' && win.content.startsWith('http')"
                         class="w-full h-full"
@@ -61,6 +64,10 @@
 </template>
 
 <script>
+import ContextMenu from '../scripts/ContextMenu';
+
+import windowOptions from '../scripts/data/windowOptions';
+
 export default {
     name: "CompWindow",
     components: {
@@ -113,6 +120,19 @@ export default {
         window.addEventListener('resize', () => {
             this.playground.width = this.win.getManager().getPlayground().width;
             this.playground.height = this.win.getManager().getPlayground().height;
+        });
+
+        this.$el.addEventListener('contextmenu', ev => {
+            ContextMenu.setPosition(ev.x, ev.y);
+            ContextMenu.setOptions(windowOptions);
+            ContextMenu.setData({ vue: this })
+            ContextMenu.display();
+            ev.preventDefault();
+            ev.stopPropagation();
+        });
+        this.$refs['content'].addEventListener('contextmenu', ev => {
+            ev.preventDefault();
+            ev.stopPropagation();
         });
 
         this.setupMoveBar();

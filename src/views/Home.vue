@@ -3,6 +3,7 @@
         ref="background"
         class="flex grow flex-col min-h-0 h-full min-w-0 w-full bgi"
     >
+        <comp-contextmenu />
         <div
             ref="playground"
             class="flex grow overflow-hidden"
@@ -13,7 +14,7 @@
                 :win="win"
             />
         </div>
-        <div class="flex h-fit w-full backdrop-blur border-t-2 border-slate-200/[0.2] dark:border-slate-600/[0.4] p-1.5 z-50">
+        <div class="flex h-fit w-full backdrop-blur border-t-2 border-slate-200/[0.2] dark:border-slate-600/[0.4] p-1.5 z-40">
             <div class="flex grow space-x-2">
                 <button
                     v-for="app in apps"
@@ -73,11 +74,13 @@ import WindowManager from '../scripts/WindowManager';
 import ViewProjects from './windows/ViewProjects.vue';
 import ViewAbout from './windows/ViewAbout.vue';
 import {markRaw} from "vue";
+import CompContextmenu from '../components/CompContextmenu.vue';
 
 export default {
     name: "HomeView",
     components: {
-        CompWindow
+        CompWindow,
+        CompContextmenu
     },
     data() {
         return {
@@ -115,8 +118,10 @@ export default {
         this.manager.setPlayground(this.$refs['playground']);
         this.createHomeWindow();
 
-        window.addEventListener('contextmenu', ev => {
-            console.log(ev);
+        this.$refs['background'].addEventListener('contextmenu', ev => {
+            // ContextMenu.setPosition(ev.x, ev.y);
+            // ContextMenu.setOptions(backgroundOptions);
+            // ContextMenu.display();
             ev.preventDefault();
         });
     },

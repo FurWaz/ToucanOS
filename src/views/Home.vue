@@ -3,6 +3,14 @@
         ref="background"
         class="flex grow flex-col min-h-0 h-full min-w-0 w-full bgi"
     >
+        <p class="fixed top-0 right-2 text-slate-50/[0.6] dark:text-slate-50/[0.3]">
+            Made by
+            <a
+                href="https://furwaz.fr"
+                target="_blank"
+                class="text-orange-500/[0.8] dark:text-orange-500/[0.5] font-semibold hover:underline"
+            > FurWaz </a>
+        </p>
         <comp-contextmenu />
         <div
             ref="playground"

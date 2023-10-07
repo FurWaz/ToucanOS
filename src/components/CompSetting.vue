@@ -58,7 +58,6 @@ export default {
         } else if (this.setting.value instanceof Promise) {
             this.setting.value.then(value => {
                 this.val = value;
-                console.log(this.val);
             });
         } else this.val = this.setting.value;
     },

@@ -36,7 +36,7 @@ const settings = [
                 value: "light"
             }
         ],
-        value: await Settings.getSetting("theme"),
+        value: Settings.getSetting("theme"),
         onchange: (value) => {
             Settings.setSetting("theme", value);
         }
@@ -44,7 +44,7 @@ const settings = [
     {
         name: "Afficher les secondes",
         type: "checkbox",
-        value: await Settings.getSetting("showSeconds"),
+        value: Settings.getSetting("showSeconds"),
         onchange: (value) => {
             Settings.setSetting("showSeconds", value);
         }

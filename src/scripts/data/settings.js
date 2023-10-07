@@ -31,7 +31,7 @@ class Settings {
     static async fetchDefaultSettings() {
         const res = await fetch('/data/defaultSettings.jsonc');
         const data = await res.text();
-        const json = jsonc2json(data);
+        const json = JSON.parse(jsonc2json(data));
         return json;
     }
 

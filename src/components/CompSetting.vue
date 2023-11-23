@@ -23,6 +23,7 @@
                     <option
                         v-for="value in setting.values"
                         :key="value.value"
+                        class="text-black"
                         :value="value.value"
                     >
                         {{ value.name }}

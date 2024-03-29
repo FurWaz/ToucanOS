@@ -95,6 +95,7 @@ import CompWindow from '../components/CompWindow.vue';
 import WindowManager from '../scripts/WindowManager';
 import ViewProjects from './windows/ViewProjects.vue';
 import ViewAbout from './windows/ViewAbout.vue';
+import ViewBrowser from './windows/ViewBrowser.vue';
 import {markRaw} from "vue";
 import CompContextmenu from '../components/CompContextmenu.vue';
 import CompSettings from '../components/CompSettings.vue';
@@ -115,6 +116,12 @@ export default {
                     name: 'Accueil',
                     img: '/assets/ToucanOs.svg',
                     callback: () => { this.createHomeWindow(); }
+                },
+                {
+                    name: 'Browser',
+                    viewBox: '0 0 512 512',
+                    icon: 'M256 464c7.4 0 27-7.2 47.6-48.4c8.8-17.7 16.4-39.2 22-63.6H186.4c5.6 24.4 13.2 45.9 22 63.6C229 456.8 248.6 464 256 464zM178.5 304h155c1.6-15.3 2.5-31.4 2.5-48s-.9-32.7-2.5-48h-155c-1.6 15.3-2.5 31.4-2.5 48s.9 32.7 2.5 48zm7.9-144H325.6c-5.6-24.4-13.2-45.9-22-63.6C283 55.2 263.4 48 256 48s-27 7.2-47.6 48.4c-8.8 17.7-16.4 39.2-22 63.6zm195.3 48c1.5 15.5 2.2 31.6 2.2 48s-.8 32.5-2.2 48h76.7c3.6-15.4 5.6-31.5 5.6-48s-1.9-32.6-5.6-48H381.8zm58.8-48c-21.4-41.1-56.1-74.1-98.4-93.4c14.1 25.6 25.3 57.5 32.6 93.4h65.9zm-303.3 0c7.3-35.9 18.5-67.7 32.6-93.4c-42.3 19.3-77 52.3-98.4 93.4h65.9zM53.6 208c-3.6 15.4-5.6 31.5-5.6 48s1.9 32.6 5.6 48h76.7c-1.5-15.5-2.2-31.6-2.2-48s.8-32.5 2.2-48H53.6zM342.1 445.4c42.3-19.3 77-52.3 98.4-93.4H374.7c-7.3 35.9-18.5 67.7-32.6 93.4zm-172.2 0c-14.1-25.6-25.3-57.5-32.6-93.4H71.4c21.4 41.1 56.1 74.1 98.4 93.4zM256 512A256 256 0 1 1 256 0a256 256 0 1 1 0 512z',
+                    callback: () => { this.createBrowserWindow(); }
                 },
                 {
                     name: 'Projets',
@@ -177,6 +184,7 @@ export default {
             }
         },
         createHomeWindow() { this.createWindow('Bienvenue', CompToucanOs); },
+        createBrowserWindow() { this.createWindow('Navigateur', ViewBrowser); },
         createProjectWindow() { this.createWindow('Projets', ViewProjects); },
         createAboutWindow() { this.createWindow('À propos', ViewAbout); },
         getCurrentHour() { return new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', second: this.showSeconds ? '2-digit' : undefined }) },
